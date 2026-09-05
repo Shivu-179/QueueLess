@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Home, MapPin, Clock, Download, Shield, User, LogOut } from 'lucide-react';
+import { Menu, X, Home, MapPin, Clock, Download, Shield, User, LogOut, Smartphone } from 'lucide-react';
 
 interface UserInfo {
   id: string;
@@ -47,11 +47,11 @@ export default function Navbar() {
   return (
     <header className="navbar-header">
       <nav className="nav-container">
-        {/* Brand Logo */}
+        {/* Brand Logo with Smart Crowd badge */}
         <Link href="/" className="brand-logo" onClick={closeMenu}>
           <span className="brand-icon">⏱</span>
           <span className="brand-text">QueueLess</span>
-          <span className="brand-badge desktop-only">Crowd Predict</span>
+          <span className="brand-badge">Smart Crowd</span>
         </Link>
 
         {/* Desktop Navigation Links */}
@@ -65,9 +65,6 @@ export default function Navbar() {
           <li>
             <Link href="/report" className="nav-link">Report Wait Time</Link>
           </li>
-          <li>
-            <Link href="/download" className="nav-link nav-link-apk">📱 Get APK</Link>
-          </li>
           {user?.role === 'ADMIN' && (
             <li>
               <Link href="/admin" className="nav-link nav-link-admin">
@@ -79,6 +76,11 @@ export default function Navbar() {
 
         {/* Desktop Action Buttons */}
         <div className="nav-actions desktop-only">
+          <Link href="/download" className="nav-app-pill" title="Download Mobile App">
+            <Download className="w-3.5 h-3.5 mr-1.5 text-blue-600" />
+            <span>Get App</span>
+          </Link>
+
           {user ? (
             <div className="user-profile-widget">
               <span className="user-greeting">
@@ -103,11 +105,11 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Right Controls: APK Quick Pill + Hamburger Toggle */}
+        {/* Mobile Right Controls: Sleek Get App pill + Hamburger Toggle */}
         <div className="mobile-header-actions">
-          <Link href="/download" className="mobile-quick-apk-btn" onClick={closeMenu}>
-            <Download className="w-3.5 h-3.5 mr-1" />
-            <span>APK</span>
+          <Link href="/download" className="mobile-quick-app-btn" onClick={closeMenu}>
+            <Smartphone className="w-3.5 h-3.5 mr-1 text-blue-600" />
+            <span>Get App</span>
           </Link>
 
           <button
@@ -116,7 +118,7 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Navigation Menu"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5 text-slate-700" /> : <Menu className="w-5 h-5 text-slate-700" />}
           </button>
         </div>
       </nav>
@@ -157,10 +159,13 @@ export default function Navbar() {
                 <span>Report Current Wait Time</span>
               </Link>
 
-              <Link href="/download" className="mobile-nav-item mobile-apk-highlight" onClick={closeMenu}>
-                <Download className="w-4 h-4 text-blue-600 mr-3" />
+              <Link href="/download" className="mobile-nav-item mobile-app-highlight" onClick={closeMenu}>
+                <Smartphone className="w-4 h-4 text-blue-600 mr-3" />
                 <div className="flex-1 flex justify-between items-center">
-                  <span>Download Mobile APK</span>
+                  <div>
+                    <span className="font-bold">Install Mobile App</span>
+                    <span className="block text-[11px] text-slate-500 font-normal">Android APK &amp; iOS PWA</span>
+                  </div>
                   <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold">3.8 MB</span>
                 </div>
               </Link>

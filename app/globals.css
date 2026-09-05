@@ -87,13 +87,15 @@ a {
 }
 
 .brand-badge {
-  font-size: 0.65rem;
-  background: var(--primary-light);
-  color: var(--primary);
-  padding: 0.15rem 0.5rem;
+  font-size: 0.68rem;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  padding: 0.18rem 0.55rem;
   border-radius: var(--radius-full);
   font-weight: 700;
-  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  text-transform: none;
 }
 
 .nav-menu {
@@ -159,6 +161,25 @@ a {
   gap: 0.5rem;
 }
 
+.nav-app-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1d4ed8;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  transition: all 0.15s ease-in-out;
+}
+
+.nav-app-pill:hover {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  transform: translateY(-1px);
+}
+
 .mobile-header-actions {
   display: none;
 }
@@ -189,20 +210,20 @@ a {
     gap: 0.6rem;
   }
 
-  .mobile-quick-apk-btn {
+  .mobile-quick-app-btn {
     display: inline-flex;
     align-items: center;
     background: #eff6ff;
-    color: #2563eb;
+    color: #1d4ed8;
     border: 1px solid #bfdbfe;
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.3rem 0.65rem;
+    padding: 0.3rem 0.7rem;
     border-radius: 9999px;
-    transition: background 0.15s ease;
+    transition: all 0.15s ease;
   }
 
-  .mobile-quick-apk-btn:active {
+  .mobile-quick-app-btn:active {
     background: #dbeafe;
   }
 
@@ -330,7 +351,8 @@ a {
     background: #e2e8f0;
   }
 
-  .mobile-apk-highlight {
+  .mobile-apk-highlight,
+  .mobile-app-highlight {
     background: #eff6ff;
     border-color: #bfdbfe;
     color: #1d4ed8;
