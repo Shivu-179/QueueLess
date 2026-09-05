@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum CrowdLevel {
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
+}
+
+enum ReportStatus {
+  APPROVED
+  PENDING
+  FLAGGED_FAKE
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  password      String
+  role          Role            @default(USER)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  reports       QueueReport[]
+  favorites     FavoritePlace[]
+  feedback      Feedback[]
+
+  @@map("users")
+}
+
+model Place {
+  id                 String          @id @default(cuid())
+  name               String
+  type               String          // Hospital, Bank, Govt Office, College Office, Railway Station, Other
+  address            String
+  openingTime        String          // e.g. "08:00 AM"
+  closingTime        String          // e.g. "05:00 PM"
+  counters           Int             @default(1)
+  department         String?         // Specific Admin Office, Room, Counter, or Shop name
+  roomLocation       String?         // Detailed Floor, Wing, Room No, Landmark
+  contactPerson      String?         // Officer, In-Charge, Doctor, or Manager name
+  contactPhone       String?         // Direct phone number or helpline
+  contactEmail       String?         // Official contact email
+  isActive           Boolean         @default(true)
+  currentCrowd       CrowdLevel      @default(LOW)
+  estimatedWait      Int             @default(10) // in minutes
+  bestTimeStart      String          @default("10:00 AM")
+  bestTimeEnd        String          @default("11:00 AM")
+  expectedWaitAtBest Int             @default(5)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  reports            QueueReport[]
+  predictions        Prediction[]
+  operatingHours     OperatingHours[]
+  favorites          FavoritePlace[]
+  feedback           Feedback[]
+
+  @@map("places")
+}
+
+model QueueReport {
+  id              String        @id @default(cuid())
+  placeId         String
+  userId          String?
+  waitingTime     Int           // in minutes reported by user
+  crowdLevel      CrowdLevel
+  peopleWaiting   Int           @default(0)
+  isSuspicious    Boolean       @default(false)
+  status          ReportStatus  @default(APPROVED)
+  flagReason      String?       // e.g. "Outlier: 500 mins reported"
+  createdAt       DateTime      @default(now())
+
+  place           Place         @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  user            User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([placeId, createdAt])
+  @@map("queue_reports")
+}
+
+model OperatingHours {
+  id          String    @id @default(cuid())
+  placeId     String
+  dayOfWeek   Int       // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  openTime    String    // e.g. "09:00"
+  closeTime   String    // e.g. "17:00"
+  isClosed    Boolean   @default(false)
+
+  place       Place     @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([placeId, dayOfWeek])
+  @@map("operating_hours")
+}
+
+model Prediction {
+  id                String      @id @default(cuid())
+  placeId           String
+  dayOfWeek         Int         // 0 = Sunday, ..., 6 = Saturday
+  hourOfDay         Int         // 0 to 23
+  predictedWaitTime Int         // average waiting time in minutes
+  crowdLevel        CrowdLevel  @default(LOW)
+  confidenceScore   Float       @default(1.0)
+  updatedAt         DateTime    @updatedAt
+
+  place             Place       @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([placeId, dayOfWeek, hourOfDay])
+  @@map("predictions")
+}
+
+model FavoritePlace {
+  id        String    @id @default(cuid())
+  userId    String
+  placeId   String
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  place     Place     @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, placeId])
+  @@map("favorite_places")
+}
+
+model Feedback {
+  id        String    @id @default(cuid())
+  userId    String?
+  placeId   String
+  rating    Int       // 1 to 5 stars
+  comment   String?
+  createdAt DateTime  @default(now())
+
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  place     Place     @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@map("feedbacks")
+}

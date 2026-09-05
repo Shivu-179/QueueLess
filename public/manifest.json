@@ -1,0 +1,17 @@
+{
+  "name": "QueueLess - Smart Crowd & Waiting Time Prediction",
+  "short_name": "QueueLess",
+  "description": "Smart crowd and waiting time prediction system for public facilities.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

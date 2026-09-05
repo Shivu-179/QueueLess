@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="100" fill="url(#blueGrad)"/>
+  <!-- Clock Circle -->
+  <circle cx="256" cy="220" r="130" fill="none" stroke="#ffffff" stroke-width="22"/>
+  <!-- Clock Hands -->
+  <line x1="256" y1="220" x2="256" y2="140" stroke="#38bdf8" stroke-width="18" stroke-linecap="round"/>
+  <line x1="256" y1="220" x2="315" y2="245" stroke="#38bdf8" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="256" cy="220" r="14" fill="#38bdf8"/>
+  <!-- Crowd / People Line silhouettes below -->
+  <circle cx="160" cy="395" r="22" fill="#93c5fd"/>
+  <path d="M130 460 C130 430, 190 430, 190 460 Z" fill="#93c5fd"/>
+  <circle cx="256" cy="385" r="26" fill="#ffffff"/>
+  <path d="M220 460 C220 420, 292 420, 292 460 Z" fill="#ffffff"/>
+  <circle cx="352" cy="395" r="22" fill="#93c5fd"/>
+  <path d="M322 460 C322 430, 382 430, 382 460 Z" fill="#93c5fd"/>
+</svg>
+

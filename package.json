@@ -1,0 +1,40 @@
+{
+  "name": "queueless",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prisma:generate": "node ./node_modules/prisma/build/index.js generate",
+    "prisma:push": "node ./node_modules/prisma/build/index.js db push",
+    "seed": "node prisma/seed.js",
+    "cap:add": "node ./node_modules/@capacitor/cli/bin/capacitor add android",
+    "cap:sync": "node ./node_modules/@capacitor/cli/bin/capacitor sync android",
+    "cap:open": "node ./node_modules/@capacitor/cli/bin/capacitor open android"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.0.1",
+    "@prisma/client": "^6.19.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.453.0",
+    "next": "14.2.18",
+    "pg": "^8.23.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.1",
+    "@capacitor/cli": "^7.0.1",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "prisma": "^6.19.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
