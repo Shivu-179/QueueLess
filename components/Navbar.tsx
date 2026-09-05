@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Menu, X, Home, MapPin, Clock, Download, Shield, User, LogOut } from 'lucide-react';
 
 interface UserInfo {
   id: string;
@@ -12,6 +13,7 @@ interface UserInfo {
 
 export default function Navbar() {
   const [user, setUser] = useState<UserInfo | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const checkUser = () => {
@@ -36,18 +38,24 @@ export default function Navbar() {
     localStorage.removeItem('queueless_token');
     localStorage.removeItem('queueless_user');
     setUser(null);
+    setIsMobileMenuOpen(false);
     window.location.href = '/';
   };
+
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <header className="navbar-header">
       <nav className="nav-container">
-        <Link href="/" className="brand-logo">
-          <span>⏱ QueueLess</span>
-          <span className="brand-badge">Smart Crowd</span>
+        {/* Brand Logo */}
+        <Link href="/" className="brand-logo" onClick={closeMenu}>
+          <span className="brand-icon">⏱</span>
+          <span className="brand-text">QueueLess</span>
+          <span className="brand-badge desktop-only">Crowd Predict</span>
         </Link>
 
-        <ul className="nav-menu">
+        {/* Desktop Navigation Links */}
+        <ul className="nav-menu desktop-only">
           <li>
             <Link href="/" className="nav-link">Home</Link>
           </li>
@@ -57,40 +65,138 @@ export default function Navbar() {
           <li>
             <Link href="/report" className="nav-link">Report Wait Time</Link>
           </li>
+          <li>
+            <Link href="/download" className="nav-link nav-link-apk">📱 Get APK</Link>
+          </li>
           {user?.role === 'ADMIN' && (
             <li>
-              <Link href="/admin" className="nav-link" style={{ color: '#c2410c', fontWeight: 700 }}>
-                Admin Portal
+              <Link href="/admin" className="nav-link nav-link-admin">
+                🛡️ Admin Portal
               </Link>
             </li>
           )}
         </ul>
 
-        <div className="nav-actions">
+        {/* Desktop Action Buttons */}
+        <div className="nav-actions desktop-only">
           {user ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <span style={{ fontSize: '0.88rem', fontWeight: 600, color: '#334155' }}>
-                👤 {user.name.split(' ')[0]} {user.role === 'ADMIN' && '(Admin)'}
+            <div className="user-profile-widget">
+              <span className="user-greeting">
+                👤 {user.name.split(' ')[0]} {user.role === 'ADMIN' && <span className="admin-tag">Admin</span>}
               </span>
               <button onClick={handleLogout} className="btn btn-outline btn-sm">
                 Logout
               </button>
             </div>
           ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div className="guest-actions">
               <Link href="/login" className="btn btn-outline btn-sm">
-                User Login
+                Login
               </Link>
               <Link href="/register" className="btn btn-primary btn-sm">
                 Register
               </Link>
-              <Link href="/admin/login" className="btn btn-secondary btn-sm" style={{ background: '#0f172a' }}>
+              <Link href="/admin/login" className="btn btn-secondary btn-sm admin-btn">
                 🛡️ Admin
               </Link>
             </div>
           )}
         </div>
+
+        {/* Mobile Right Controls: APK Quick Pill + Hamburger Toggle */}
+        <div className="mobile-header-actions">
+          <Link href="/download" className="mobile-quick-apk-btn" onClick={closeMenu}>
+            <Download className="w-3.5 h-3.5 mr-1" />
+            <span>APK</span>
+          </Link>
+
+          <button
+            type="button"
+            className="mobile-toggle-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Navigation Menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Drawer / Slide-Down Menu */}
+      {isMobileMenuOpen && (
+        <div className="mobile-menu-backdrop" onClick={closeMenu}>
+          <div className="mobile-menu-drawer" onClick={(e) => e.stopPropagation()}>
+            {/* User status card if logged in */}
+            {user ? (
+              <div className="mobile-user-card">
+                <div className="mobile-user-avatar">
+                  <User className="w-5 h-5 text-blue-600" />
+                </div>
+                <div className="mobile-user-info">
+                  <div className="mobile-user-name">{user.name}</div>
+                  <div className="mobile-user-email">
+                    {user.email} {user.role === 'ADMIN' && <span className="admin-pill">Admin</span>}
+                  </div>
+                </div>
+              </div>
+            ) : null}
+
+            {/* Nav Links List */}
+            <div className="mobile-links-list">
+              <Link href="/" className="mobile-nav-item" onClick={closeMenu}>
+                <Home className="w-4 h-4 text-blue-600 mr-3" />
+                <span>Home</span>
+              </Link>
+
+              <Link href="/places" className="mobile-nav-item" onClick={closeMenu}>
+                <MapPin className="w-4 h-4 text-emerald-600 mr-3" />
+                <span>Find Places & Facilities</span>
+              </Link>
+
+              <Link href="/report" className="mobile-nav-item" onClick={closeMenu}>
+                <Clock className="w-4 h-4 text-amber-600 mr-3" />
+                <span>Report Current Wait Time</span>
+              </Link>
+
+              <Link href="/download" className="mobile-nav-item mobile-apk-highlight" onClick={closeMenu}>
+                <Download className="w-4 h-4 text-blue-600 mr-3" />
+                <div className="flex-1 flex justify-between items-center">
+                  <span>Download Mobile APK</span>
+                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold">3.8 MB</span>
+                </div>
+              </Link>
+
+              {user?.role === 'ADMIN' && (
+                <Link href="/admin" className="mobile-nav-item mobile-admin-highlight" onClick={closeMenu}>
+                  <Shield className="w-4 h-4 text-orange-600 mr-3" />
+                  <span>Admin Dashboard</span>
+                </Link>
+              )}
+            </div>
+
+            {/* Bottom Actions on Mobile */}
+            <div className="mobile-menu-footer">
+              {user ? (
+                <button onClick={handleLogout} className="mobile-logout-btn">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </button>
+              ) : (
+                <div className="mobile-auth-grid">
+                  <Link href="/login" className="btn btn-outline w-full" onClick={closeMenu}>
+                    User Login
+                  </Link>
+                  <Link href="/register" className="btn btn-primary w-full" onClick={closeMenu}>
+                    Register
+                  </Link>
+                  <Link href="/admin/login" className="btn btn-secondary w-full col-span-2" onClick={closeMenu}>
+                    🛡️ Facility Admin Login
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
