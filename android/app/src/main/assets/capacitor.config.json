@@ -1,0 +1,10 @@
+{
+	"appId": "com.queueless.app",
+	"appName": "QueueLess",
+	"webDir": "out",
+	"server": {
+		"androidScheme": "https",
+		"cleartext": true,
+		"url": "https://queue-less-indol.vercel.app"
+	}
+}
