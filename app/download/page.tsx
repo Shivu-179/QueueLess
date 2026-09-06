@@ -120,9 +120,9 @@ export default function DownloadPage() {
                 <span className="dl-spec-val" style={{ color: '#0f172a', fontWeight: 600 }}>Android 6.0 to 15.0</span>
               </div>
               <div className="dl-spec-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.82rem' }}>
-                <span className="dl-spec-label" style={{ color: '#64748b', fontWeight: 600 }}>Live Wi-Fi Sync:</span>
+                <span className="dl-spec-label" style={{ color: '#64748b', fontWeight: 600 }}>Global Cloud Sync:</span>
                 <span className="dl-spec-val mono" style={{ color: '#2563eb', display: 'flex', alignItems: 'center', fontFamily: 'monospace', background: '#ffffff', border: '1px solid #e2e8f0', padding: '2px 6px', borderRadius: 6, fontSize: '0.78rem', fontWeight: 600 }}>
-                  <Wifi style={{ width: 14, height: 14, marginRight: 4 }} /> 10.119.2.183:3000
+                  <Globe style={{ width: 14, height: 14, marginRight: 4 }} /> queue-less-indol.vercel.app
                 </span>
               </div>
             </div>
@@ -130,7 +130,7 @@ export default function DownloadPage() {
             {/* Direct Download Button */}
             <a href="/api/download" className="dl-btn-primary" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, width: '100%', padding: '0.95rem 1.5rem', borderRadius: 16, background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)', color: '#ffffff', fontWeight: 700, fontSize: '1.05rem', textDecoration: 'none', boxShadow: '0 10px 15px -3px rgba(37, 99, 235, 0.35)', boxSizing: 'border-box' }}>
               <Download style={{ width: 20, height: 20 }} />
-              <span>Download Android APK (3.86 MB)</span>
+              <span>Download Android APK (4.14 MB)</span>
             </a>
 
             {/* QR Code Scanner Card */}
@@ -146,7 +146,7 @@ export default function DownloadPage() {
                 <div className="dl-qr-desc" style={{ fontSize: '0.78rem', color: '#64748b', lineHeight: 1.45, marginBottom: '0.4rem' }}>
                   Open your phone camera or Google Lens and point it here to download <strong>QueueLess.apk</strong> straight to your phone.
                 </div>
-                <div className="dl-qr-url" style={{ fontFamily: 'monospace', fontSize: '0.72rem', fontWeight: 700, color: '#2563eb', wordBreak: 'break-all' }}>http://10.119.2.183:3000/api/download</div>
+                <div className="dl-qr-url" style={{ fontFamily: 'monospace', fontSize: '0.72rem', fontWeight: 700, color: '#2563eb', wordBreak: 'break-all' }}>https://queue-less-indol.vercel.app/api/download</div>
               </div>
             </div>
 
@@ -195,7 +195,7 @@ export default function DownloadPage() {
                 <div>
                   Open <strong>Safari</strong> on your iPhone and go to:
                   <div style={{ background: '#ffffff', border: '1px solid #cbd5e1', padding: '4px 8px', borderRadius: 6, fontWeight: 700, color: '#2563eb', marginTop: 4, fontFamily: 'monospace' }}>
-                    http://10.119.2.183:3000
+                    https://queue-less-indol.vercel.app
                   </div>
                 </div>
               </div>
@@ -221,23 +221,17 @@ export default function DownloadPage() {
             <div className="dl-specs-box">
               <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.92rem', marginBottom: '0.35rem', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <Laptop style={{ width: 16, height: 16, color: '#2563eb' }} />
-                <span>Laptop &amp; Desktop Browser Access:</span>
+                <span>Global Web &amp; Desktop Access:</span>
               </div>
               <div style={{ fontSize: '0.82rem', color: '#64748b', marginBottom: '0.75rem' }}>
-                Access the full QueueLess portal from any computer browser:
+                Access the full QueueLess portal from any computer or device:
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ fontSize: '0.82rem' }}>
-                  <span style={{ color: '#64748b' }}>On this laptop: </span>
-                  <a href="http://localhost:3000" target="_blank" rel="noreferrer" style={{ fontWeight: 700, color: '#2563eb', textDecoration: 'underline' }}>
-                    http://localhost:3000
-                  </a>
-                </div>
-                <div style={{ fontSize: '0.82rem' }}>
-                  <span style={{ color: '#64748b' }}>On other laptops on your Wi-Fi: </span>
-                  <a href="http://10.119.2.183:3000" target="_blank" rel="noreferrer" style={{ fontWeight: 700, color: '#2563eb', textDecoration: 'underline' }}>
-                    http://10.119.2.183:3000
+                  <span style={{ color: '#64748b' }}>Live Official Website: </span>
+                  <a href="https://queue-less-indol.vercel.app" target="_blank" rel="noreferrer" style={{ fontWeight: 700, color: '#2563eb', textDecoration: 'underline' }}>
+                    https://queue-less-indol.vercel.app
                   </a>
                 </div>
               </div>

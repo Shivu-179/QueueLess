@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'https',
     cleartext: true,
-    url: 'http://10.119.2.183:3000',
+    url: 'https://queue-less-indol.vercel.app',
   },
 };
 
