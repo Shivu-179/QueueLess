@@ -8,6 +8,8 @@ on:
 jobs:
   build-apk:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Code
@@ -34,10 +36,26 @@ jobs:
         run: |
           cd android
           ./gradlew assembleDebug --stacktrace
+          cp app/build/outputs/apk/debug/app-debug.apk ../QueueLess.apk
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: QueueLess-Debug-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: QueueLess-APK
+          path: QueueLess.apk
+
+      - name: Release QueueLess APK on GitHub
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag_name: latest
+          name: "QueueLess Android App (Latest Build)"
+          body: |
+            ## 📱 QueueLess - Smart Crowd & Waiting Time Prediction
+            Download the official Android APK below to install on your phone.
+            - **Package**: `QueueLess.apk`
+            - **Compatibility**: Android 6.0 to 15.0
+          files: QueueLess.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
