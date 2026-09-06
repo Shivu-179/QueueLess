@@ -1,13 +1,19 @@
 # ⏱ QueueLess – Smart Crowd & Waiting Time Prediction System
 
-> **Student Capstone Project**  
-> An intelligent crowd monitoring and waiting time prediction system for public services (Hospitals, Banks, Government Offices, College Offices, Railway Stations).
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-queue--less--indol.vercel.app-brightgreen?style=for-the-badge&logo=vercel)](https://queue-less-indol.vercel.app)
+[![Download APK](https://img.shields.io/badge/Download-Android%20APK%20(4.14%20MB)-2563eb?style=for-the-badge&logo=android)](https://queue-less-indol.vercel.app/api/download)
+[![Database](https://img.shields.io/badge/Database-Neon%20PostgreSQL-336791?style=for-the-badge&logo=postgresql)](https://neon.tech)
+[![Build Status](https://img.shields.io/badge/Build-Passing-success?style=for-the-badge&logo=github)](https://github.com/Shivu-179/QueueLess/actions)
+
+> **Live Production Deployment**: [https://queue-less-indol.vercel.app](https://queue-less-indol.vercel.app)  
+> **Direct APK Download**: [https://queue-less-indol.vercel.app/api/download](https://queue-less-indol.vercel.app/api/download)  
+> **Multi-Device Portal**: [https://queue-less-indol.vercel.app/download](https://queue-less-indol.vercel.app/download)
 
 ---
 
 ## 📌 Project Overview
 
-**QueueLess** solves the widespread problem of long, unpredictable queues at public facilities. By collecting actual wait times from citizens and applying statistical outlier filtering and rolling average predictions, QueueLess calculates:
+**QueueLess** solves the widespread problem of long, unpredictable queues at public facilities (Hospitals, Banks, Government Offices, College Counters, Railway Stations). By collecting actual wait times from citizens and applying statistical outlier filtering and rolling average predictions, QueueLess calculates:
 1. **Real-time Crowd Levels**: 🟢 LOW, 🟡 MEDIUM, 🟠 HIGH, 🔴 VERY HIGH.
 2. **Estimated Waiting Time** in minutes for any public counter.
 3. **Recommended Best Time Today** to visit with minimum expected wait duration.
