@@ -8,6 +8,7 @@ const config: CapacitorConfig = {
     androidScheme: 'https',
     cleartext: true,
     url: 'https://queue-less-indol.vercel.app',
+    allowNavigation: ['queue-less-indol.vercel.app', '*.vercel.app'],
   },
 };
 
