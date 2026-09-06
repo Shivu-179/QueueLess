@@ -82,7 +82,7 @@ export default async function HomePage() {
           </div>
         ) : (
           <div className="cards-grid">
-            {places.slice(0, 6).map((place) => {
+            {places.slice(0, 6).map((place: any) => {
               const badge = getBadge(place.currentCrowd);
               return (
                 <div key={place.id} className="place-card">
